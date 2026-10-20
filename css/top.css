@@ -86,12 +86,13 @@ Architecture : FLOCSS + BEM */
 ================================================== */
 
 .p-brand {
+  --section-padding-top: 250px;
   --brand-label-size: clamp(2.25rem, 3.2vw, 3.5rem);
   --brand-copy-size: clamp(2.125rem, 2.4vw, 2.375rem);
   --brand-prior-tagline-lines: 1;
   position: relative;
   margin-top: -130px;
-  padding-top: 250px;
+  padding-top: var(--section-padding-top);
   z-index: var(--z-sub);
 }
 
@@ -226,7 +227,8 @@ Architecture : FLOCSS + BEM */
 ================================================== */
 
 .p-products {
-  padding-top: clamp(32px, 4vw, 64px);
+  --section-padding-top: clamp(32px, 4vw, 64px);
+  padding-top: var(--section-padding-top);
 }
 
 .p-products .l-section-inner {
@@ -444,6 +446,8 @@ Architecture : FLOCSS + BEM */
 }
 
 .p-special-care {
+  --section-padding-top: clamp(64px, 8vw, 128px);
+  padding-top: var(--section-padding-top);
   position: relative;
   overflow: hidden;
 }
@@ -711,7 +715,8 @@ Architecture : FLOCSS + BEM */
 06. Contact
 ================================================== */
 .p-contact {
-  padding: 140px 0;
+  --section-padding-top: 140px;
+  padding: var(--section-padding-top) 0;
   text-align: center;
 }
 
@@ -861,7 +866,7 @@ Architecture : FLOCSS + BEM */
     --brand-label-size: clamp(1.875rem, 5.6vw, 2.5rem);
     --brand-copy-size: clamp(2.125rem, 6vw, 2.375rem);
     margin-top: -60px;
-    padding-top: 140px;
+    --section-padding-top: 140px;
   }
 
   .p-brand .c-section-heading {
@@ -1094,7 +1099,7 @@ Architecture : FLOCSS + BEM */
   /* Contact */
 
   .p-contact {
-    padding: 80px 0;
+    --section-padding-top: 80px;
   }
 
   .p-contact__lead {
@@ -1276,6 +1281,9 @@ Architecture : FLOCSS + BEM */
   }
 }
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
   .p-hero__sparkle {
     animation: none;
     opacity: 0.2;
@@ -1292,6 +1300,12 @@ Architecture : FLOCSS + BEM */
 
 .p-top-page {
   overflow-x: visible;
+}
+
+/* Align the heading, rather than the section padding edge, on anchor navigation.
+   The shared scroll-padding already reserves the header height plus 24px. */
+.p-top-page :is(#brand, #products, #special-care, #contact) {
+  scroll-margin-block: calc(0px - var(--section-padding-top)) 0px;
 }
 
 /* Hero framing: align the lead with the moon while keeping header clearance. */
