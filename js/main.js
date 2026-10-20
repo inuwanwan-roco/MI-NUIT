@@ -44,11 +44,63 @@ document.querySelectorAll('.l-header').forEach((siteHeader) => {
         toggle.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
         if (open && focusMenu) navigation.querySelector('a')?.focus();
     };
+    // Use the same four homepage sections on phones; keep the original PC/tablet nodes intact.
+    const menu = navigation.querySelector('.l-header__menu');
+    const phoneNavigation = window.matchMedia('(max-width: 768px)');
+    if (menu) {
+        const originalItems = [...menu.childNodes];
+        const homepagePrefix = document.body.classList.contains('p-top-page') ? '' : 'index.html';
+        const phoneItems = [
+            ['Brand Story', 'brand'],
+            ['Products', 'products'],
+            ['Special Care', 'special-care'],
+            ['Contact', 'contact']
+        ].map(([label, section]) => {
+            const item = document.createElement('li');
+            const link = document.createElement('a');
+            item.className = 'l-header__item';
+            link.className = 'l-header__link';
+            link.href = `${homepagePrefix}#${section}`;
+            link.textContent = label;
+            item.append(link);
+            return item;
+        });
+        const updateNavigation = () => {
+            setOpen(false);
+            menu.replaceChildren(...(phoneNavigation.matches ? phoneItems : originalItems));
+        };
+        updateNavigation();
+        phoneNavigation.addEventListener('change', updateNavigation);
+
+        // Defer an incoming phone anchor until load-time layout/scroll refreshes finish.
+        // Removing the initial hash prevents native and scripted scrolling from competing.
+        const initialHash = location.hash;
+        const initialSection = phoneNavigation.matches &&
+            document.body.classList.contains('p-top-page') &&
+            phoneItems.some((item) => item.firstElementChild.getAttribute('href') === initialHash) &&
+            document.getElementById(initialHash.slice(1));
+        if (initialSection && performance.getEntriesByType('navigation')[0]?.type !== 'back_forward') {
+            history.replaceState(history.state, '', location.pathname + location.search);
+            const alignInitialSection = async () => {
+                await document.fonts.ready;
+                requestAnimationFrame(() => requestAnimationFrame(() => {
+                    if (location.hash) return; // Respect a newer navigation selected during loading.
+                    history.replaceState(history.state, '', initialHash);
+                    initialSection.scrollIntoView({
+                        block: 'start',
+                        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'
+                    });
+                }));
+            };
+            if (document.readyState === 'complete') alignInitialSection();
+            else window.addEventListener('load', alignInitialSection, { once: true });
+        }
+    }
     toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true', true));
     navigation.addEventListener('click', (event) => {
         if (event.target.closest('a')) {
             setOpen(false);
-            toggle.focus();
+            toggle.focus({ preventScroll: true });
         }
     });
     document.addEventListener('keydown', (event) => {
