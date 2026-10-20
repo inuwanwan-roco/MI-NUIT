@@ -72,10 +72,10 @@ document.querySelectorAll('.l-header').forEach((siteHeader) => {
         updateNavigation();
         phoneNavigation.addEventListener('change', updateNavigation);
 
-        // Defer an incoming phone anchor until load-time layout/scroll refreshes finish.
+        // Defer incoming phone anchors and the closing PRODUCTS CTA until load-time refreshes finish.
         // Removing the initial hash prevents native and scripted scrolling from competing.
         const initialHash = location.hash;
-        const initialSection = phoneNavigation.matches &&
+        const initialSection = (phoneNavigation.matches || initialHash === '#products') &&
             document.body.classList.contains('p-top-page') &&
             phoneItems.some((item) => item.firstElementChild.getAttribute('href') === initialHash) &&
             document.getElementById(initialHash.slice(1));
