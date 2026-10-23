@@ -368,18 +368,27 @@ Architecture : FLOCSS + BEM */
 }
 
 .p-product-card__image {
+  /* Match the cleansing bottle's visible height at the standard desktop size. */
+  --product-subject-height: 234.85px;
+  --product-fit-width: 100cqi;
+  container-type: inline-size;
   display: flex;
   justify-content: center;
   align-items: center;
   flex: 1;
-  /* transform:translateZ(40px); */
+  min-width: 0;
 }
 
 .p-product-card__image img {
-  width: 100%;
-  max-width: 180px;
+  /* Compensate for transparent canvas space without changing the source images. */
+  width: min(
+    calc(var(--product-subject-height) * var(--product-width-per-height)),
+    calc(var(--product-fit-width) * var(--product-width-per-subject))
+  );
+  max-width: none;
   height: auto;
-  object-fit: cover;
+  flex-shrink: 0;
+  object-fit: contain;
   transition:
     transform var(--duration-fast1) var(--ease-base),
     filter var(--duration-fast1) var(--ease-base);
@@ -397,21 +406,48 @@ Architecture : FLOCSS + BEM */
   gap: var(--space-2);
 }
 
-.p-product-card--cleansing img {
-  max-width: 240px;
+/* Canvas width / visible subject height, then canvas width / visible subject width. */
+.p-product-card--cleansing {
+  --product-width-per-height: 0.553547;
+  --product-width-per-subject: 1.792793;
+}
+.p-product-card--toner {
+  --product-width-per-height: 1.07113;
+  --product-width-per-subject: 2.015748;
+}
+.p-product-card--emulsion {
+  --product-width-per-height: 0.981783;
+  --product-width-per-subject: 1.695364;
+}
+.p-product-card--mask {
+  --product-width-per-height: 2.334347;
+  --product-width-per-subject: 1.146269;
+}
+.p-product-card--special img:first-child {
+  --product-width-per-height: 0.464891;
+  --product-width-per-subject: 1.361702;
+}
+.p-product-card--special img:last-child {
+  --product-width-per-height: 0.512035;
+  --product-width-per-subject: 1.388724;
+}
+.p-product-card--primer {
+  --product-width-per-height: 0.954334;
+  --product-width-per-subject: 1.142857;
+}
+.p-product-card--liquid {
+  --product-width-per-height: 0.504662;
+  --product-width-per-subject: 1.652672;
+}
+.p-product-card--cushion {
+  --product-width-per-height: 0.947439;
+  --product-width-per-subject: 1.146819;
 }
 
-.p-product-card--liquid img {
-  max-width: 240px;
-}
-
-.p-product-card--special img {
-  max-width: 180px;
-}
-
-@media (min-width: 1201px) {
-  .p-product-card--mask img {
-    max-width: 360px;
+@media (min-width: 769px) {
+  .p-product-card__image--double {
+    /* Retain the existing desktop card height after sizing down the two bottles. */
+    min-height: calc(180px * 916 / 384);
   }
 }
 
@@ -938,15 +974,10 @@ Architecture : FLOCSS + BEM */
   }
 
   .p-product-card__image {
+    /* Preserve the cleansing bottle's current size inside each mobile image slot. */
+    --product-subject-height: calc(100cqi * 719 / 830);
     flex: none;
     aspect-ratio: 1;
-  }
-
-  .p-product-card__image img {
-    width: 100%;
-    max-width: 100%;
-    height: 100%;
-    object-fit: contain;
   }
 
   .p-product-card h3 {
@@ -1151,8 +1182,8 @@ Architecture : FLOCSS + BEM */
 .p-hero__copy-small {
   margin-top: 0;
 }
-.p-product-card__image--double img {
-  width: calc((100% - var(--space-2)) / 2);
+.p-product-card__image--double {
+  --product-fit-width: calc((100cqi - var(--space-2)) / 2);
 }
 .p-special-care__content {
   gap: clamp(24px, 4vw, 64px);
@@ -1195,11 +1226,6 @@ Architecture : FLOCSS + BEM */
   }
   .p-product-card--liquid {
     min-height: 320px;
-  }
-  /* Keep the previous image slot height in the three-column layout. */
-  .p-product-card--liquid img {
-    aspect-ratio: 2 / 3;
-    object-fit: contain;
   }
 }
 @media (max-width: 768px) {
