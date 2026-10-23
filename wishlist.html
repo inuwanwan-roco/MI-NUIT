@@ -71,14 +71,26 @@
                         <li aria-current="page">Wishlist</li>
                     </ol>
                 </nav>
-                <section class="p-wishlist__content" aria-labelledby="wishlist-title">
+                <section class="p-wishlist__content" aria-labelledby="wishlist-title" aria-busy="false">
                     <div class="c-page-header">
                         <p class="c-page-header__heading">WISHLIST</p>
                         <h1 class="c-page-header__text" id="wishlist-title">お気に入り</h1>
                     </div>
-                    <i class="fa-regular fa-heart p-wishlist__icon" aria-hidden="true"></i>
-                    <p class="p-wishlist__message">お気に入り機能は準備中です。</p>
-                    <a href="shop.html" class="c-button c-button--outline">商品一覧へ戻る</a>
+                    <p class="p-wishlist__loading" role="status" hidden>商品情報を読み込んでいます。</p>
+                    <p class="p-wishlist__count" aria-live="polite" aria-atomic="true"></p>
+                    <p class="c-wishlist-notice" id="wishlist-status" role="status" hidden></p>
+                    <div class="p-wishlist__list"></div>
+                    <div class="p-wishlist__empty" hidden>
+                        <i class="fa-regular fa-heart p-wishlist__icon" aria-hidden="true"></i>
+                        <p class="p-wishlist__message">まだお気に入りの商品がありません。</p>
+                        <a href="shop.html" class="c-button c-button--outline">VIEW PRODUCTS →</a>
+                    </div>
+                    <div class="p-wishlist__error" hidden>
+                        <p>商品情報を読み込めませんでした。</p>
+                        <button type="button" class="c-button c-button--outline p-wishlist__retry">もう一度読み込む</button>
+                        <a href="shop.html" class="c-button c-button--outline">VIEW PRODUCTS →</a>
+                    </div>
+                    <noscript><p>お気に入りの表示にはJavaScriptを有効にしてください。</p><a href="shop.html">VIEW PRODUCTS →</a></noscript>
                 </section>
             </div>
         </main>
@@ -105,5 +117,6 @@
             </div>
         </footer>
         <script src="js/main.js"></script>
+        <script src="js/wishlist.js"></script>
     </body>
 </html>
