@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="MI/NUITのお気に入りページです。">
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Noto+Serif+JP:wght@200..900&display=swap"
+                rel="stylesheet">
+        <!-- Font Awesome -->
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+        <!-- CSS -->
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/common.css">
+        <link rel="stylesheet" href="css/shop.css">
+        <link rel="stylesheet" href="css/wishlist.css">
+        <title>Wishlist | MI/NUIT</title>
+    </head>
+    <body class="p-wishlist-page">
+        <header class="l-header l-header--light l-header--shop">
+            <div class="l-container">
+                <div class="l-header__inner">
+                    <!-- Logo -->
+                    <p class="l-header__logo">
+                        <a href="index.html">MI/NUIT</a>
+                    </p>
+                    <!-- Navigation -->
+                    <button type="button" class="l-header__toggle" aria-controls="header-navigation" aria-expanded="false" aria-label="メニューを開く"><span></span><span></span><span></span></button>
+                    <nav class="l-header__nav" id="header-navigation" aria-label="メインナビゲーション">
+                        <ul class="l-header__menu">
+                            <li class="l-header__item">
+                                <a href="index.html" class="l-header__link">HOME</a>
+                            </li>
+                            <li class="l-header__item">
+                                <a href="index.html#brand" class="l-header__link">BRAND STORY</a>
+                            </li>
+                            <li class="l-header__item">
+                                <a href="index.html#special-care" class="l-header__link">
+                                    SPECIAL CARE
+                                </a>
+                            </li>
+                            <li class="l-header__item">
+                                <a href="index.html#contact" class="l-header__link">
+                                    CONTACT
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- Button Area -->
+                    <div class="l-header__actions">
+                        <a href="wishlist.html" class="l-header__icon-link"
+                            aria-label="お気に入り" title="お気に入り" aria-current="page">
+                            <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                            <span class="l-header__icon-count" hidden></span>
+                        </a>
+                        <a href="cart.html" class="l-header__icon-link" aria-label="カートを見る">
+                            <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main class="p-wishlist">
+            <div class="l-container">
+                <nav class="c-breadcrumb" aria-label="パンくずリスト">
+                    <ol class="c-breadcrumb__list">
+                        <li><a href="index.html">HOME</a></li>
+                        <li aria-current="page">Wishlist</li>
+                    </ol>
+                </nav>
+                <section class="p-wishlist__content" aria-labelledby="wishlist-title">
+                    <div class="c-page-header">
+                        <p class="c-page-header__heading">WISHLIST</p>
+                        <h1 class="c-page-header__text" id="wishlist-title">お気に入り</h1>
+                    </div>
+                    <i class="fa-regular fa-heart p-wishlist__icon" aria-hidden="true"></i>
+                    <p class="p-wishlist__message">お気に入り機能は準備中です。</p>
+                    <a href="shop.html" class="c-button c-button--outline">商品一覧へ戻る</a>
+                </section>
+            </div>
+        </main>
+        <footer class="p-footer">
+            <div class="p-footer__top">
+                <nav class="p-footer__nav p-footer__nav--left">
+                    <ul>
+                        <li><a href="brand.html">Brand</a></li>
+                        <li><a href="index.html#special-care">Special Care</a></li>
+                    </ul>
+                </nav>
+                <nav class="p-footer__nav p-footer__nav--right">
+                    <ul>
+                        <li><a href="shop.html">Products</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="p-footer__brand">
+                <h2 class="p-footer__logo">MI/NUIT</h2>
+                <small class="p-footer__copy">
+                    © 2026 MI/NUIT
+                </small>
+            </div>
+        </footer>
+        <script src="js/main.js"></script>
+    </body>
+</html>

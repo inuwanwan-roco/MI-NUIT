@@ -40,6 +40,94 @@
 }
 
 
+/* SHOP header only: preserve the shared header and menu behavior on other pages. */
+.l-header--shop .l-header__actions {
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.l-header--shop .l-header__icon-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    color: var(--color-text);
+    font-size: 1.25rem;
+    line-height: 1;
+    text-decoration: none;
+    transition: color var(--transition-base);
+}
+
+.l-header--shop .l-header__icon-link:hover {
+    color: var(--color-primary);
+}
+
+.l-header--shop .l-header__icon-link:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
+
+@media (min-width: 1024px) {
+    .l-header--shop .l-header__inner {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    }
+
+    .l-header--shop .l-header__logo {
+        justify-self: start;
+    }
+
+    .l-header--shop .l-header__nav {
+        display: flex;
+        position: static;
+        max-height: none;
+        overflow: visible;
+        padding: 0;
+        background: transparent;
+    }
+
+    .l-header--shop .l-header__menu {
+        flex-direction: row;
+        align-items: center;
+        gap: clamp(16px, 2vw, 32px);
+    }
+
+    .l-header--shop .l-header__nav .l-header__link {
+        color: var(--color-text);
+        padding-block: 0;
+    }
+
+    .l-header--shop .l-header__nav .l-header__link:hover {
+        color: var(--color-primary);
+    }
+
+    .l-header--shop .l-header__actions {
+        justify-self: end;
+    }
+
+    .l-header--shop .l-header__toggle {
+        display: none;
+    }
+}
+
+@media (max-width: 1023px) {
+    .l-header--shop .l-header__inner {
+        gap: 8px;
+    }
+
+    .l-header--shop .l-header__actions {
+        margin-left: auto;
+    }
+
+    .l-header--shop .l-header__toggle {
+        order: 3;
+        margin-left: 0;
+    }
+}
+
 /* ==========================================
 01.Products Layout
 ========================================== */

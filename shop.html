@@ -19,7 +19,7 @@
         <title>Products | MI/NUIT</title>
     </head>
     <body>
-        <header class="l-header l-header--light">
+        <header class="l-header l-header--light l-header--shop">
             <div class="l-container">
                 <div class="l-header__inner">
                     <!-- Logo -->
@@ -31,26 +31,32 @@
                     <nav class="l-header__nav" id="header-navigation" aria-label="メインナビゲーション">
                         <ul class="l-header__menu">
                             <li class="l-header__item">
-                                <a href="brand.html" class="l-header__link">
-                                    Brand
+                                <a href="index.html" class="l-header__link">HOME</a>
+                            </li>
+                            <li class="l-header__item">
+                                <a href="index.html#brand" class="l-header__link">BRAND STORY</a>
+                            </li>
+                            <li class="l-header__item">
+                                <a href="index.html#special-care" class="l-header__link">
+                                    SPECIAL CARE
                                 </a>
                             </li>
                             <li class="l-header__item">
-                                <a href="#special-care" class="l-header__link">
-                                    Special Care
-                                </a>
-                            </li>
-                            <li class="l-header__item">
-                                <a href="contact.html" class="l-header__link">
-                                    Contact
+                                <a href="index.html#contact" class="l-header__link">
+                                    CONTACT
                                 </a>
                             </li>
                         </ul>
                     </nav>
                     <!-- Button Area -->
                     <div class="l-header__actions">
-                        <a href="cart.html"class="c-button c-button--primary">
-                            CART
+                        <a href="wishlist.html" class="l-header__icon-link"
+                            aria-label="お気に入り" title="お気に入り">
+                            <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                            <span class="l-header__icon-count" hidden></span>
+                        </a>
+                        <a href="cart.html" class="l-header__icon-link" aria-label="カートを見る">
+                            <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
                         </a>
                     </div>
                 </div>

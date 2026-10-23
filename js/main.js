@@ -67,16 +67,17 @@ document.querySelectorAll('.l-header').forEach((siteHeader) => {
         });
         const updateNavigation = () => {
             setOpen(false);
-            menu.replaceChildren(...(phoneNavigation.matches ? phoneItems : originalItems));
+            // SHOP uses its authored HOME/section links at every width.
+            const usePhoneItems = phoneNavigation.matches && !siteHeader.classList.contains('l-header--shop');
+            menu.replaceChildren(...(usePhoneItems ? phoneItems : originalItems));
         };
         updateNavigation();
         phoneNavigation.addEventListener('change', updateNavigation);
 
-        // Defer incoming phone anchors and the closing PRODUCTS CTA until load-time refreshes finish.
+        // Defer incoming homepage section anchors until load-time refreshes finish.
         // Removing the initial hash prevents native and scripted scrolling from competing.
         const initialHash = location.hash;
-        const initialSection = (phoneNavigation.matches || initialHash === '#products') &&
-            document.body.classList.contains('p-top-page') &&
+        const initialSection = document.body.classList.contains('p-top-page') &&
             phoneItems.some((item) => item.firstElementChild.getAttribute('href') === initialHash) &&
             document.getElementById(initialHash.slice(1));
         if (initialSection && performance.getEntriesByType('navigation')[0]?.type !== 'back_forward') {
