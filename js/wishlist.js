@@ -35,6 +35,19 @@
         }
     }
 
+    function updateHeaderCount() {
+        const count = selected.size;
+        const text = count === 0 ? '' : count > 99 ? '99+' : String(count);
+        const label = `お気に入り（${count}件）`;
+        document.querySelectorAll('.l-header__icon-count').forEach(badge => {
+            if (badge.textContent !== text) badge.textContent = text;
+            if (badge.hidden !== (count === 0)) badge.hidden = count === 0;
+            const link = badge.closest('a');
+            // The badge is decorative; the link name exposes the full count without a second live region.
+            if (link && link.getAttribute('aria-label') !== label) link.setAttribute('aria-label', label);
+        });
+    }
+
     function getCatalog(root) {
         const products = new Map();
         root.querySelectorAll('.p-products-card').forEach(card => {
@@ -177,6 +190,7 @@
     }
 
     function refresh() {
+        updateHeaderCount();
         document.querySelectorAll('.p-products-card[data-wishlist-id]').forEach(card => {
             const button = card.querySelector('.c-wishlist-toggle');
             if (button) updateButton(button, catalog.get(card.dataset.wishlistId));
@@ -207,6 +221,7 @@
     }
 
     selected = readSavedIds();
+    updateHeaderCount();
     if (list) {
         document.querySelector('.p-wishlist__retry').addEventListener('click', loadWishlist);
         loadWishlist();

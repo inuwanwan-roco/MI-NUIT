@@ -70,6 +70,31 @@
     outline-offset: 2px;
 }
 
+/* Keep the count inside the existing 44px heart link, without changing header spacing. */
+.l-header--shop .l-header__icon-count {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    display: grid;
+    place-items: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #d898ad;
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: .65625rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    letter-spacing: 0;
+    pointer-events: none;
+}
+
+.l-header--shop .l-header__icon-count[hidden] {
+    display: none;
+}
+
 @media (min-width: 1024px) {
     .l-header--shop .l-header__inner {
         display: grid;
