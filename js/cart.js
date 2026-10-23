@@ -121,7 +121,7 @@ function createEmptyCart() {
                 現在カートに商品はありません。
             </p>
             <a
-                href="products.html"
+                href="shop.html"
                 class="c-button
                         c-button--primary">
                 商品一覧を見る
