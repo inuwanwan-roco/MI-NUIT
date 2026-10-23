@@ -61,7 +61,8 @@
                 name: card.dataset.name,
                 price: Number(card.dataset.price),
                 priceText: card.querySelector('.p-products-card__price').textContent.trim(),
-                image: card.dataset.image
+                image: card.dataset.image,
+                requiresOption: Boolean(card.querySelector('.p-products-option'))
             });
         });
         if (!products.size) throw new Error('No products found');
@@ -135,13 +136,51 @@
         const price = document.createElement('p');
         price.className = 'p-wishlist-card__price';
         price.textContent = product.priceText;
-        body.append(heading, price);
+        const destination = `shop.html?product=${encodeURIComponent(product.id)}`;
+        const actions = document.createElement('div');
+        actions.className = 'p-wishlist-card__actions';
+        // Options are chosen on the actual SHOP card; never add an unselected variant.
+        const add = document.createElement(product.requiresOption ? 'a' : 'button');
+        add.className = 'p-wishlist-action p-wishlist-action--primary';
+        add.textContent = 'カートに入れる';
+        if (product.requiresOption) {
+            add.href = destination;
+            add.setAttribute('aria-label', `${product.name}の種類・カラーを選んでカートに入れる`);
+        } else {
+            add.type = 'button';
+            add.setAttribute('aria-label', `${product.name}をカートに入れる`);
+            add.addEventListener('click', () => {
+                try {
+                    saveCart({
+                        id: product.id,
+                        name: product.name,
+                        price: product.price,
+                        image: product.image,
+                        optionName: '',
+                        optionValue: '',
+                        quantity: 1
+                    });
+                    showToast('カートに追加しました');
+                } catch {
+                    showToast('カートに追加できませんでした。保存設定をご確認ください。');
+                }
+            });
+        }
+        const back = document.createElement('a');
+        back.className = 'p-wishlist-action p-wishlist-action--secondary';
+        back.href = destination;
+        back.textContent = '商品ページに戻る →';
+        back.setAttribute('aria-label', `${product.name}の商品ページに戻る`);
+        actions.append(add, back);
+        body.append(heading, price, actions);
         card.append(visual, createButton(product), body);
         return card;
     }
 
     function updateEmptyState() {
-        document.querySelector('.p-wishlist__empty').hidden = renderedCards.size > 0;
+        const hasProducts = renderedCards.size > 0;
+        document.querySelector('.p-wishlist__empty').hidden = hasProducts;
+        list.hidden = !hasProducts;
     }
 
     function renderWishlist() {
@@ -153,7 +192,7 @@
             if (ids.has(id) || removalTimers.has(id)) continue;
             if (card.contains(document.activeElement)) {
                 const remaining = [...renderedCards].find(([otherId]) => ids.has(otherId));
-                if (remaining) remaining[1].querySelector('button').focus({ preventScroll: true });
+                if (remaining) remaining[1].querySelector('.c-wishlist-toggle').focus({ preventScroll: true });
                 else {
                     const title = document.getElementById('wishlist-title');
                     title.tabIndex = -1;
@@ -184,7 +223,7 @@
                 renderedCards.set(product.id, card);
                 list.append(card);
             }
-            updateButton(card.querySelector('button'), product);
+            updateButton(card.querySelector('.c-wishlist-toggle'), product);
         }
         updateEmptyState();
     }

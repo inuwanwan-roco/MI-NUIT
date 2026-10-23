@@ -83,7 +83,7 @@
                     <div class="p-wishlist__empty" hidden>
                         <i class="fa-regular fa-heart p-wishlist__icon" aria-hidden="true"></i>
                         <p class="p-wishlist__message">まだお気に入りの商品がありません。</p>
-                        <a href="shop.html" class="c-button c-button--outline">VIEW PRODUCTS →</a>
+                        <a href="shop.html" class="p-wishlist-action p-wishlist-action--primary p-wishlist__shop-link">SHOPページに戻る →</a>
                     </div>
                     <div class="p-wishlist__error" hidden>
                         <p>商品情報を読み込めませんでした。</p>
@@ -92,6 +92,9 @@
                     </div>
                     <noscript><p>お気に入りの表示にはJavaScriptを有効にしてください。</p><a href="shop.html">VIEW PRODUCTS →</a></noscript>
                 </section>
+            </div>
+            <div class="c-toast" id="toast" role="status" aria-live="polite" aria-atomic="true">
+                <span class="c-toast__text"></span>
             </div>
         </main>
         <footer class="p-footer">
@@ -117,6 +120,7 @@
             </div>
         </footer>
         <script src="js/main.js"></script>
+        <script src="js/cart-store.js"></script>
         <script src="js/wishlist.js"></script>
     </body>
 </html>

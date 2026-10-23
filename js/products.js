@@ -17,8 +17,12 @@ cartButtons.forEach((button) => {
         if (!item) {
             return;
         }
-        saveCart(item);
-        showToast("カートに追加しました");
+        try {
+            saveCart(item);
+            showToast("カートに追加しました");
+        } catch {
+            showToast("カートに追加できませんでした。保存設定をご確認ください。");
+        }
     });
 });
 
@@ -63,7 +67,7 @@ function createCartItem(card) {
     }
 
     return {
-        id: card.dataset.id,
+        id: card.dataset.wishlistId || card.dataset.id,
         name: card.dataset.name,
         price: Number(card.dataset.price),
         image: card.dataset.image,
@@ -71,37 +75,6 @@ function createCartItem(card) {
         optionValue,
         quantity
     };
-}
-
-// ------------------------------------------
-// Save Cart
-// ------------------------------------------
-
-function saveCart(item) {
-    const cart =
-        JSON.parse(
-            localStorage.getItem("cart")
-        ) || [];
-
-    const existingItem =
-        cart.find((product) => {
-            return (
-                product.id === item.id &&
-                product.optionName === item.optionName &&
-                product.optionValue === item.optionValue
-            );
-        });
-
-    if (existingItem) {
-        existingItem.quantity += item.quantity;
-    } else {
-        cart.push(item);
-    }
-
-    localStorage.setItem(
-        "cart",
-        JSON.stringify(cart)
-    );
 }
 
 // ==========================================
@@ -243,4 +216,31 @@ accordionButtons.forEach((button) => {
         });
     }
     motion.addEventListener('change', () => { if (motion.matches) showAll(); });
+
+    // WISHLIST destinations locate an existing card, without changing the collection layout.
+    // A query parameter avoids competing with the browser's native hash scrolling.
+    const requestedId = new URLSearchParams(window.location.search).get('product');
+    const requestedCard = cards.find(card => card.dataset.wishlistId === requestedId);
+    if (requestedCard) {
+        const optionToggle = requestedCard.querySelector('.p-products-accordion__button');
+        if (optionToggle && optionToggle.getAttribute('aria-expanded') !== 'true') optionToggle.click();
+        const loaded = document.readyState === 'complete' ? Promise.resolve() :
+            new Promise(resolve => window.addEventListener('load', resolve, { once: true }));
+        Promise.all([loaded, document.fonts?.ready]).then(async () => {
+            // The mobile filter panel collapses on initialization; wait for its
+            // existing transition before measuring the product's final position.
+            await new Promise(resolve => requestAnimationFrame(resolve));
+            await Promise.all(panel.getAnimations().map(animation => animation.finished.catch(() => {})));
+            observer?.unobserve(requestedCard);
+            requestedCard.classList.remove('is-reveal-pending');
+            // offsetTop excludes the reveal transform, keeping the destination stable.
+            let top = 0;
+            for (let node = requestedCard; node; node = node.offsetParent) top += node.offsetTop;
+            const headerHeight = document.querySelector('.l-header').getBoundingClientRect().height;
+            const focusTarget = requestedCard.querySelector('.p-products-card__title');
+            focusTarget.tabIndex = -1;
+            focusTarget.focus({ preventScroll: true });
+            window.scrollTo({ top: Math.max(0, top - headerHeight - 24), behavior: motion.matches ? 'instant' : 'smooth' });
+        });
+    }
 })();
