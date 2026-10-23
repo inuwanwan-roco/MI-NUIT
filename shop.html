@@ -16,9 +16,9 @@
         <link rel="stylesheet" href="css/reset.css">
         <link rel="stylesheet" href="css/common.css">
         <link rel="stylesheet" href="css/shop.css">
-        <title>Products | MI/NUIT</title>
+        <title>SHOP | MI/NUIT</title>
     </head>
-    <body>
+    <body class="p-shop-page">
         <header class="l-header l-header--light l-header--shop">
             <div class="l-container">
                 <div class="l-header__inner">
@@ -67,66 +67,76 @@
                 <nav class="c-breadcrumb" aria-label="パンくずリスト">
                     <ol class="c-breadcrumb__list">
                         <li><a href="index.html">HOME</a></li>
-                        <li aria-current="page">Products</li>
+                        <li aria-current="page">SHOP</li>
                     </ol>
                 </nav>
-                <section class="c-page-header">
-                    <p class="c-page-header__heading">
-                        PRODUCT COLLECTION
-                    </p>
-                    <h1 class="c-page-header__text">
-                        Products
-                    </h1>
-                    <p class="c-page-header__description">
-                        Discover skincare and makeup inspired by the quiet beauty of midnight.
-                    </p>
+                <section class="c-page-header p-shop-intro" aria-labelledby="shop-title">
+                    <h1 class="c-page-header__text" id="shop-title">SHOP</h1>
+                    <p class="c-page-header__description">Discover your midnight ritual.</p>
                 </section>
                 <div class="p-products-page__layout">
-                    <!-- Sidebar -->
-                    <aside class="p-products-sidebar">
-                        <h2 class="p-products-sidebar__title"> 
-                            CATEGORY
-                        </h2>
-                        <nav class="p-products-sidebar__nav">
-                            <ul class="p-products-sidebar__list">
-                                <li class="p-products-sidebar__group">
-                                    <button class="p-products-sidebar__button">
-                                        Skincare
-                                    </button>
-                                    <ul class="p-products-sidebar__submenu">
-                                        <li><a href="#cleansing">Cleansing</a></li>
-                                        <li><a href="#toner">Toner</a></li>
-                                        <li><a href="#emulsion">Emulsion</a></li>
-                                        <li><a href="#mask">Mask</a></li>
-                                        <li><a href="#cream">Cream</a></li>
-                                        <li><a href="#serum">Serum</a></li>
-                                        <li><a href="#special-care">Special Care</a></li>
-                                    </ul>
-                                </li>
-                                <li class="p-products-sidebar__group">
-                                    <button class="p-products-sidebar__button">
-                                        Base Makeup
-                                    </button>
-                                    <ul class="p-products-sidebar__submenu">
-                                        <li><a href="#tone-up-base">Tone Up Base</a></li>
-                                        <li><a href="#foundation">Foundation</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </nav>
+                    <aside class="p-products-sidebar" aria-label="カテゴリーと並び替え">
+                        <button type="button" class="p-products-filter__toggle" aria-controls="shop-filters" aria-expanded="false" hidden>
+                            <i class="fa-solid fa-sliders" aria-hidden="true"></i>
+                            Filter &amp; Sort
+                            <span class="p-products-filter__toggle-icon" aria-hidden="true">＋</span>
+                        </button>
+                        <div class="p-products-filter__panel" id="shop-filters">
+                            <div class="p-products-filter__inner">
+                                <fieldset class="p-products-filter__group" disabled>
+                                    <legend>CATEGORY</legend>
+                                    <label class="p-products-filter__category">
+                                        <input type="radio" name="shop-category" value="all" checked>
+                                        <span>All Products</span><span class="p-products-filter__category-count" aria-hidden="true">15</span>
+                                    </label>
+                                    <label class="p-products-filter__category">
+                                        <input type="radio" name="shop-category" value="skincare">
+                                        <span>Skincare</span><span class="p-products-filter__category-count" aria-hidden="true">5</span>
+                                    </label>
+                                    <label class="p-products-filter__category">
+                                        <input type="radio" name="shop-category" value="mask">
+                                        <span>Mask</span><span class="p-products-filter__category-count" aria-hidden="true">4</span>
+                                    </label>
+                                    <label class="p-products-filter__category">
+                                        <input type="radio" name="shop-category" value="special-care">
+                                        <span>Special Care</span><span class="p-products-filter__category-count" aria-hidden="true">2</span>
+                                    </label>
+                                    <label class="p-products-filter__category">
+                                        <input type="radio" name="shop-category" value="base-makeup">
+                                        <span>Base Makeup</span><span class="p-products-filter__category-count" aria-hidden="true">4</span>
+                                    </label>
+                                </fieldset>
+                                <div class="p-products-filter__mobile-sort">
+                                    <label for="shop-sort-mobile">並び替え</label>
+                                    <select id="shop-sort-mobile" data-products-sort disabled>
+                                        <option value="recommended">おすすめ順</option>
+                                        <option value="price-asc">価格が安い順</option>
+                                        <option value="price-desc">価格が高い順</option>
+                                        <option value="name">商品名順</option>
+                                    </select>
+                                </div>
+                                <button type="button" class="p-products-filter__close" data-filter-close>商品を見る</button>
+                            </div>
+                        </div>
+                        <noscript><p>絞り込み・並び替えにはJavaScriptを有効にしてください。</p></noscript>
                     </aside>
-                    <!--Products Content-->
-                    <div class="p-products-page__content">
-                        <section class="p-products-section" id="skincare">
-                            <h2 class="p-products-section__heading">Skincare</h2>
-                            <p class="p-products-section__text">
-                                Daily skincare that gently cleanses, hydrates and protects your skin.
-                            </p>
-                            <!-- クレンジング -->
-                            <div class="p-products-category" id="cleansing">
-                                <h3 class="p-products-category__title">Cleansing</h3>
-                                <div class="p-products-grid">
-                                    <article class="p-products-card"
+                    <section class="p-products-page__content" aria-labelledby="shop-list-title">
+                        <h2 class="u-visually-hidden" id="shop-list-title">商品一覧</h2>
+                        <div class="p-products-toolbar">
+                            <p class="p-products-count" id="shop-products-count" role="status" aria-live="polite" aria-atomic="true">15件の商品</p>
+                            <div class="p-products-sort">
+                                <label for="shop-sort">並び替え</label>
+                                <select id="shop-sort" data-products-sort disabled>
+                                    <option value="recommended">おすすめ順</option>
+                                    <option value="price-asc">価格が安い順</option>
+                                    <option value="price-desc">価格が高い順</option>
+                                    <option value="name">商品名順</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="p-products-grid" id="shop-products">
+                            <article class="p-products-card"
+                                                data-category="skincare"
                                                 data-wishlist-id="cleansing-oil"
                                                 data-id="cleansing-oil"
                                                 data-name="Melt Black Cleansing Oil"
@@ -138,10 +148,10 @@
                                         </figure>
                                         <div class="p-products-card__body">
                                             <div class="p-products-card__info">
-                                                <h4 class="p-products-card__title">
+                                                <h3 class="p-products-card__title">
                                                     Melt Black<br>
                                                     Cleansing Oil
-                                                </h4>
+                                                </h3>
                                                 <p class="p-products-card__description">
                                                     とろけるようにメイクや毛穴汚れを<br>
                                                     やさしく落とし、肌を整えるクレンジングオイル。
@@ -154,13 +164,8 @@
                                             </button>
                                         </div>
                                     </article>
-                                </div>
-                            </div>
-                            <!-- 化粧水 -->
-                            <div class="p-products-category" id="toner">
-                                <h3 class="p-products-category__title">Toner</h3>
-                                <div class="p-products-grid">
-                                    <article class="p-products-card"
+                            <article class="p-products-card"
+                                                data-category="skincare"
                                                 data-wishlist-id="toner-moist"
                                                 data-id="toner"
                                                 data-name="Aqua Balance Toner Moist"
@@ -172,10 +177,10 @@
                                         </figure>
                                             <div class="p-products-card__body">
                                                 <div class="p-products-card__info">
-                                                    <h4 class="p-products-card__title">
+                                                    <h3 class="p-products-card__title">
                                                         Aqua Balance<br>
                                                         Toner Moist
-                                                    </h4>
+                                                    </h3>
                                                     <p class="p-products-card__description">
                                                         乾燥しやすい肌にうるおいを与え、<br>
                                                         しっとりと柔らかな肌へ導く。
@@ -188,7 +193,8 @@
                                                 </button>
                                             </div>
                                     </article>
-                                    <article class="p-products-card"
+                            <article class="p-products-card"
+                                                data-category="skincare"
                                                 data-wishlist-id="toner-light"
                                                 data-id="toner"
                                                 data-name="Aqua Balance Toner Light"
@@ -200,10 +206,10 @@
                                         </figure>
                                             <div class="p-products-card__body">
                                                 <div class="p-products-card__info">
-                                                    <h4 class="p-products-card__title">
+                                                    <h3 class="p-products-card__title">
                                                         Aqua Balance<br>
                                                         Toner Light
-                                                    </h4>
+                                                    </h3>
                                                     <p class="p-products-card__description">
                                                         みずみずしい使い心地で、<br>
                                                         さっぱりと透明感のある肌へ導く。
@@ -216,13 +222,8 @@
                                                 </button>
                                             </div>
                                     </article>
-                                </div>
-                            </div>
-                            <!-- 乳液 -->
-                            <div class="p-products-category" id="emulsion">
-                                <h3 class="p-products-category__title">Emulsion</h3>
-                                <div class="p-products-grid">
-                                    <article class="p-products-card"
+                            <article class="p-products-card"
+                                                data-category="skincare"
                                                 data-wishlist-id="emulsion-moist"
                                                 data-id="emulsion"
                                                 data-name="Aqua Balance Emulsion Moist"
@@ -234,10 +235,10 @@
                                         </figure>
                                             <div class="p-products-card__body">
                                                 <div class="p-products-card__info">
-                                                    <h4 class="p-products-card__title">
+                                                    <h3 class="p-products-card__title">
                                                         Aqua Balance<br>
                                                         Emulsion Moist
-                                                    </h4>
+                                                    </h3>
                                                     <p class="p-products-card__description">
                                                         しっとりとした使い心地で潤いを閉じ込め、<br>
                                                         ふっくらなめらかな肌へ。
@@ -250,7 +251,8 @@
                                                 </button>
                                             </div>
                                     </article>
-                                    <article class="p-products-card"
+                            <article class="p-products-card"
+                                                data-category="skincare"
                                                 data-wishlist-id="emulsion-light"
                                                 data-id="emulsion"
                                                 data-name="Aqua Balance Emulsion Light"
@@ -262,10 +264,10 @@
                                         </figure>
                                             <div class="p-products-card__body">
                                                 <div class="p-products-card__info">
-                                                    <h4 class="p-products-card__title">
+                                                    <h3 class="p-products-card__title">
                                                         Aqua Balance<br>
                                                         Emulsion Light
-                                                    </h4>
+                                                    </h3>
                                                     <p class="p-products-card__description">
                                                         さっぱりと軽やかに潤いを逃がさず、<br>
                                                         透明感のある肌へ。
@@ -278,20 +280,8 @@
                                                 </button>
                                             </div>
                                     </article>
-                                </div>
-                            </div>
-                        </section>
-                        <!-- 美容マスク3種類＋１週間お試しマスク  -->
-                        <section class="p-products-section" id="mask">
-                            <h2 class="p-products-section__heading">Mask Collection</h2>
-                            <p class="p-products-section__text">
-                                A collection of masks that provide deep hydration and nourishment for your skin.
-                            </p>
-                            <div class="p-products-category" id="mask">
-                                <h3 class="p-products-category__title">Mask Box Series</h3>
-                                <div class="p-products-grid">
-                                    <!-- 毛穴・角質ケア -->
-                                    <article class="p-products-card"
+                            <article class="p-products-card"
+                                                data-category="mask"
                                                 data-wishlist-id="midnight-pore-mask"
                                                 data-id="mask"
                                                 data-name="Midnight Pore Mask"
@@ -303,9 +293,9 @@
                                         </figure>
                                             <div class="p-products-card__body">
                                                 <div class="p-products-card__info">
-                                                    <h4 class="p-products-card__title">
+                                                    <h3 class="p-products-card__title">
                                                         Midnight Pore Mask
-                                                    </h4>
+                                                    </h3>
                                                     <p class="p-products-card__description">
                                                         古い毛穴や角質をケアし、<br>
                                                         肌をなめらかに整えるマスク。
@@ -318,8 +308,8 @@
                                                 </button>
                                             </div>
                                     </article>
-                                    <!-- トーンアップ・透明感ケア -->
-                                    <article class="p-products-card"
+                            <article class="p-products-card"
+                                                data-category="mask"
                                                 data-wishlist-id="moon-glow-mask"
                                                 data-id="mask"
                                                 data-name="Moon Glow Mask"
@@ -331,9 +321,9 @@
                                         </figure>
                                             <div class="p-products-card__body">
                                                 <div class="p-products-card__info">
-                                                    <h4 class="p-products-card__title">
+                                                    <h3 class="p-products-card__title">
                                                         Moon Glow Mask
-                                                    </h4>
+                                                    </h3>
                                                     <p class="p-products-card__description">
                                                         うるおいと透明感を与え、<br>
                                                         1トーン明るい素肌へ。
@@ -346,8 +336,8 @@
                                                 </button>
                                             </div>
                                     </article>
-                                    <!-- ハリ・むくみ・リフトアップケア -->
-                                    <article class="p-products-card"
+                            <article class="p-products-card"
+                                                data-category="mask"
                                                 data-wishlist-id="bloom-lift-mask"
                                                 data-id="mask"
                                                 data-name="Bloom Lift Mask"
@@ -359,9 +349,9 @@
                                         </figure>
                                         <div class="p-products-card__body">
                                             <div class="p-products-card__info">
-                                                <h4 class="p-products-card__title">
+                                                <h3 class="p-products-card__title">
                                                     Bloom Lift Mask
-                                                </h4>
+                                                </h3>
                                                 <p class="p-products-card__description">
                                                     ふっくらとしたハリを与え、<br>
                                                     いきいきとした印象の素肌へ
@@ -374,8 +364,8 @@
                                             </button>  
                                         </div>
                                     </article>
-                                    <!-- トライアルマスク -->
-                                    <article class="p-products-card p-products-card--accordion"
+                            <article class="p-products-card p-products-card--accordion"
+                                                data-category="mask"
                                                 data-wishlist-id="trial-mask"
                                                 data-id="trial-mask"
                                                 data-name="Trial Mask"
@@ -387,9 +377,9 @@
                                         </figure>
                                         <div class="p-products-card__body">
                                             <div class="p-products-card__info">
-                                                <h4 class="p-products-card__title">
+                                                <h3 class="p-products-card__title">
                                                     Trial Mask
-                                                </h4>
+                                                </h3>
                                                 <p class="p-products-card__description">
                                                         3種類のマスクを気軽にお試しいただけます。
                                                 </p>
@@ -445,19 +435,8 @@
                                             </button>
                                         </div>
                                     </article>
-                                </div>
-                            </div>
-                        </section>
-                        <!-- Special Care -->
-                        <section class="p-products-section"id="special-care">
-                            <h2 class="p-products-section__heading">Special Care</h2>
-                            <p class="p-products-section__text">
-                                Special care products that provide intensive treatment for your skin.
-                            </p>
-                            <div class="p-products-category" id="special-care">
-                                <h3 class="p-products-category__title">Cream</h3>
-                                <div class="p-products-grid">
-                                    <article class="p-products-card"
+                            <article class="p-products-card"
+                                                data-category="special-care"
                                                 data-wishlist-id="midnight-cream"
                                                 data-id="cream"
                                                 data-name="Deep Moist Midnight Cream"
@@ -469,10 +448,10 @@
                                         </figure>
                                             <div class="p-products-card__body">
                                                 <div class="p-products-card__info">
-                                                    <h4 class="p-products-card__title">
+                                                    <h3 class="p-products-card__title">
                                                         Deep Moist<br>
                                                         Midnight Cream
-                                                    </h4>
+                                                    </h3>
                                                     <p class="p-products-card__description">
                                                         特別なご褒美にナイトクリームを。<br>
                                                         眠っている間の濃密保湿で、翌朝の肌に自信。
@@ -485,7 +464,8 @@
                                                 </button>
                                             </div>
                                     </article>
-                                    <article class="p-products-card"
+                            <article class="p-products-card"
+                                                data-category="special-care"
                                                 data-wishlist-id="blue-moon-drop"
                                                 data-id="serum"
                                                 data-name="Blue Moon Drop"
@@ -497,9 +477,9 @@
                                         </figure>
                                         <div class="p-products-card__body">
                                             <div class="p-products-card__info">
-                                                <h4 class="p-products-card__title">
+                                                <h3 class="p-products-card__title">
                                                     Blue Moon Drop
-                                                </h4>
+                                                </h3>
                                                 <p class="p-products-card__description">
                                                     肌のすみずみまでうるおいを届け、<br>
                                                     肌本来の美しさを引き出す、特別なセラム。
@@ -512,20 +492,8 @@
                                             </button>
                                         </div>
                                     </article>
-                                </div>
-                            </div>
-                        </section>
-                        <!-- ベースメイク -->
-                        <section class="p-products-section" id="base-makeup">
-                            <h2 class="p-products-section__heading">Base Makeup</h2>
-                            <p class="p-products-section__text">
-                                Base makeup products that provide a smooth, even canvas for your makeup.
-                            </p>
-                            <!-- 化粧下地 -->
-                            <div class="p-products-category" id="tone-up-base">
-                                <h3 class="p-products-category__title">UV Tone Up Base</h3>
-                                <div class="p-products-grid">
-                                    <article class="p-products-card"
+                            <article class="p-products-card"
+                                                data-category="base-makeup"
                                                 data-wishlist-id="glow-tone-up-base"
                                                 data-id="tone-up-base"
                                                 data-name="Glow UV Tone Up Base"
@@ -537,8 +505,8 @@
                                         </figure>
                                             <div class="p-products-card__body">
                                                 <div class="p-products-card__info">
-                                                    <h4 class="p-products-card__title">
-                                                        Glow UV Tone Up Base</h4>
+                                                    <h3 class="p-products-card__title">
+                                                        Glow UV Tone Up Base</h3>
                                                     <p class="p-products-card__description">
                                                         光を味方に、内側から輝くツヤ肌へ。
                                                     </p>
@@ -550,7 +518,8 @@
                                                 </button>
                                             </div>
                                     </article>
-                                    <article class="p-products-card"
+                            <article class="p-products-card"
+                                                data-category="base-makeup"
                                                 data-wishlist-id="airy-tone-up-base"
                                                 data-id="tone-up-base"
                                                 data-name="Airy UV Tone Up Base"
@@ -562,9 +531,9 @@
                                         </figure>
                                         <div class="p-products-card__body">
                                             <div class="p-products-card__info">
-                                                <h4 class="p-products-card__title">
+                                                <h3 class="p-products-card__title">
                                                     Airy UV Tone Up Base
-                                                </h4>
+                                                </h3>
                                                 <p class="p-products-card__description">
                                                     まるでフィルターをかけたような毛穴レスな印象に。
                                                 </p>
@@ -576,13 +545,8 @@
                                             </button>
                                         </div>
                                     </article>
-                                </div>
-                            </div>
-                            <!-- ファンデーション -->
-                            <div class="p-products-category" id="foundation">
-                                <h3 class="p-products-category__title">Foundation</h3>
-                                <div class="p-products-grid">
-                                    <article class="p-products-card p-products-card--accordion"
+                            <article class="p-products-card p-products-card--accordion"
+                                                data-category="base-makeup"
                                                 data-wishlist-id="liquid-foundation"
                                                 data-id="foundation-liquid"
                                                 data-name="Cover Fit Skin Foundation Liquid"
@@ -594,10 +558,10 @@
                                         </figure>
                                         <div class="p-products-card__body">
                                             <div class="p-products-card__info">
-                                                <h4 class="p-products-card__title">
+                                                <h3 class="p-products-card__title">
                                                     Cover Fit Skin<br>
                                                     Foundation Liquid
-                                                </h4>
+                                                </h3>
                                                 <p class="p-products-card__description">
                                                     夏でも崩したくない、高密着・ハイカバー。<br>
                                                     美しさを24時間キープするリキッドファンデーション。    
@@ -656,7 +620,8 @@
                                             </button>
                                         </div>
                                     </article>
-                                    <article class="p-products-card p-products-card--accordion"
+                            <article class="p-products-card p-products-card--accordion"
+                                                data-category="base-makeup"
                                                 data-wishlist-id="cushion-foundation"
                                                 data-id="foundation-cushion"
                                                 data-name="Cover Fit Skin Foundation Cushion"
@@ -668,10 +633,10 @@
                                         </figure>
                                         <div class="p-products-card__body">
                                             <div class="p-products-card__info">
-                                                <h4 class="p-products-card__title">
+                                                <h3 class="p-products-card__title">
                                                     Cover Fit Skin<br>
                                                     Foundation Cushion
-                                                </h4>
+                                                </h3>
                                                 <p class="p-products-card__description">
                                                     夏でも崩したくない、高密着・ハイカバー。<br>
                                                     美しさを24時間キープするクッションファンデーション。
@@ -730,12 +695,11 @@
                                             </button> 
                                         </div>
                                     </article>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
+                        </div>
+                        <p class="p-products-empty" hidden>該当する商品がありません。</p>
+                    </section>
                 </div>
-            </div> 
+            </div>
         <p class="c-wishlist-notice" id="wishlist-status" role="status" hidden></p>
         <!-- Toast -->
         <div class="c-toast" id="toast" aria-live="polite">
