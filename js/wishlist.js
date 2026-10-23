@@ -39,7 +39,7 @@
         const count = selected.size;
         const text = count === 0 ? '' : count > 99 ? '99+' : String(count);
         const label = `お気に入り（${count}件）`;
-        document.querySelectorAll('.l-header__icon-count').forEach(badge => {
+        document.querySelectorAll('.l-header__icon-link[href="wishlist.html"] .l-header__icon-count').forEach(badge => {
             if (badge.textContent !== text) badge.textContent = text;
             if (badge.hidden !== (count === 0)) badge.hidden = count === 0;
             const link = badge.closest('a');
