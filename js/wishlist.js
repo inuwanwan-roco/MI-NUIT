@@ -38,20 +38,17 @@
     function getCatalog(root) {
         const products = new Map();
         root.querySelectorAll('.p-products-card').forEach(card => {
-            const imageLink = card.querySelector('.p-products-card__image-link');
-            const href = imageLink?.getAttribute('href');
-            const id = href && new URL(href, location.href).searchParams.get('id');
-            // IDs follow the existing detail URLs, not the cart's shared category IDs.
-            if (!id || card.dataset.wishlistId !== id || products.has(id)) {
-                throw new Error('Product wishlist IDs must match unique detail IDs');
+            // Keep saved IDs stable and independent of both links and legacy cart IDs.
+            const id = card.dataset.wishlistId;
+            if (!id || !/^[a-z0-9-]+$/.test(id) || products.has(id)) {
+                throw new Error('Product wishlist IDs must be unique');
             }
             products.set(id, {
                 id,
                 name: card.dataset.name,
                 price: Number(card.dataset.price),
                 priceText: card.querySelector('.p-products-card__price').textContent.trim(),
-                image: card.dataset.image,
-                href
+                image: card.dataset.image
             });
         });
         if (!products.size) throw new Error('No products found');
@@ -102,9 +99,8 @@
         const card = document.createElement('article');
         card.className = 'p-wishlist-card';
         card.dataset.wishlistId = product.id;
-        const imageLink = document.createElement('a');
-        imageLink.className = 'p-wishlist-card__image-link';
-        imageLink.href = product.href;
+        const visual = document.createElement('div');
+        visual.className = 'p-wishlist-card__image';
         const image = document.createElement('img');
         image.src = product.image;
         image.alt = product.name;
@@ -115,23 +111,19 @@
             const placeholder = document.createElement('span');
             placeholder.className = 'p-wishlist-card__image-notice';
             placeholder.textContent = '画像を準備中です';
-            imageLink.append(placeholder);
+            visual.append(placeholder);
         }, { once: true });
-        imageLink.append(image);
+        visual.append(image);
         const body = document.createElement('div');
         body.className = 'p-wishlist-card__body';
         const heading = document.createElement('h2');
         heading.className = 'p-wishlist-card__title';
-        const link = document.createElement('a');
-        link.href = product.href;
-        link.textContent = product.name;
-        heading.append(link);
+        heading.textContent = product.name;
         const price = document.createElement('p');
         price.className = 'p-wishlist-card__price';
         price.textContent = product.priceText;
         body.append(heading, price);
-        // The heart is a sibling of the links; no nested interactive elements.
-        card.append(imageLink, createButton(product), body);
+        card.append(visual, createButton(product), body);
         return card;
     }
 

@@ -333,18 +333,10 @@ body{
     box-shadow: var(--box-shadow3);
 }
 
-.p-products-card__image-link{
-    display:block;
-    color:inherit;
-    text-decoration:none;
-}
-
-.p-products-card__link {
+.p-products-card__info {
     display: flex;
     flex-direction: column;
     height: 100%;
-    color: inherit;
-    text-decoration: none;
 }
 
 .p-products-card__image {
